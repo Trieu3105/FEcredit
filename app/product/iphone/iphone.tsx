@@ -16,7 +16,7 @@ export default function Home() {
 
   useEffect(() => {
     axios
-    .get(`${process.env.NEXT_PUBLIC_API_URL}/sanpham`)
+    .get(`${process.env.NEXT_PUBLIC_API_URL}/api/sanpham`)
       .then((response) => {
         if (response.data.success) {
           setProducts(response.data.data);

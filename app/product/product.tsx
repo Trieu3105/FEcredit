@@ -38,7 +38,7 @@ export default function Product() {
     const fetchProducts = async () => {
       setLoading(true);
       try {
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/products`, {
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/products`, {
           params: { parent_id: selectedCategoryId }, // Gửi parent_id đến backend
         });
         if (response.data.success && Array.isArray(response.data.data.products)) {
@@ -64,7 +64,7 @@ export default function Product() {
   }, [selectedCategoryId]);
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/sanpham`)
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/sanpham`)
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
@@ -84,7 +84,7 @@ export default function Product() {
     }
 
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/add`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/add`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id_user, id_product, quantity: 1 }),

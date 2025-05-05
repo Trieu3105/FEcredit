@@ -22,7 +22,7 @@ export default function SidebarMenu({ onSelectCategory }: SidebarMenuProps) {
   };
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/categories`)
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/categories`)
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {

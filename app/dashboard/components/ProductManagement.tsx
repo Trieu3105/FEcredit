@@ -43,7 +43,7 @@ export default function ProductManagement() {
 
   useEffect(() => {
     // Fetch products, categories, and brands in a single API call
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/products`)
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/products`)
       .then((res) => res.json())
       .then((data) => {
         setProducts(data.data.products || []);
@@ -53,7 +53,7 @@ export default function ProductManagement() {
   }, []);
 
   const handleSave = (updatedProduct: product) => {
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/products/${updatedProduct.id}`, {
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/products/${updatedProduct.id}`, {
       method: "PUT", // Specify the correct HTTP method
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updatedProduct),
@@ -73,7 +73,7 @@ export default function ProductManagement() {
 
   const handleDelete = (id: number) => {
     if (confirm("Are you sure you want to delete this product?")) {
-      fetch(`${process.env.NEXT_PUBLIC_API_URL}/products/${id}`, { method: "DELETE" })
+      fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/products/${id}`, { method: "DELETE" })
         .then((res) => res.json())
         .then(() => {
           setProducts((prev) => prev.filter((p) => p.id !== id));
@@ -100,7 +100,7 @@ export default function ProductManagement() {
       images: JSON.parse(JSON.stringify(newProduct.images || "[]")),
     }); // Debugging: Log the product data being sent
 
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/products`, {
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/products`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
