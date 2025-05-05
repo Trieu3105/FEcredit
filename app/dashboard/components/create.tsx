@@ -94,7 +94,7 @@ export default function Create() {
 
     console.log("Sending product data to API:", newProduct); // Debugging: Log the product data being sent
 
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}0/api/products`, {
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/products`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newProduct), // Send images as plain string
