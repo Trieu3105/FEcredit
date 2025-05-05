@@ -16,7 +16,7 @@ export default function Home() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/api/categories")
+      .get("${process.env.NEXT_PUBLIC_API_URL}/api/categories")
       .then((response) => {
         if (response.data.success) {
           setProducts(response.data.data);
