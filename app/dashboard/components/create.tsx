@@ -39,7 +39,7 @@ export default function Create() {
 
   useEffect(() => {
     // Fetch products, categories, and brands in a single API call
-    fetch("http://localhost:8080/api/products")
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/products`)
       .then((res) => res.json())
       .then((data) => {
         setProducts(data.data.products || []);
@@ -54,7 +54,7 @@ export default function Create() {
 
   const handleSave = () => {
     if (editingProduct) {
-      fetch(`http://localhost:8080/api/products/${editingProduct.id}`, {
+      fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/products/${editingProduct.id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(editingProduct),
@@ -71,7 +71,7 @@ export default function Create() {
 
   const handleDelete = (id: number) => {
     if (confirm("Are you sure you want to delete this product?")) {
-      fetch(`http://localhost:8080/api/products/${id}`, { method: "DELETE" })
+      fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/products/${id}`, { method: "DELETE" })
         .then((res) => res.json())
         .then(() => {
           setProducts((prev) => prev.filter((p) => p.id !== id));
@@ -94,7 +94,7 @@ export default function Create() {
 
     console.log("Sending product data to API:", newProduct); // Debugging: Log the product data being sent
 
-    fetch("http://localhost:8080/api/products", {
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}0/api/products`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newProduct), // Send images as plain string

@@ -98,7 +98,7 @@ export default function CartTable() {
   // 🛒 Xử lý cập nhật giỏ hàng
   const handleUpdateCart = async () => {
     try {
-      const response = await fetch("${process.env.NEXT_PUBLIC_API_URL}/api/update", {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/update`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ cartItems: cart }), // Gửi toàn bộ giỏ hàng lên API

@@ -64,7 +64,7 @@ export default function Product() {
   }, [selectedCategoryId]);
 
   useEffect(() => {
-    fetch("${process.env.NEXT_PUBLIC_API_URL}/api/media")
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/sanpham`)
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {

@@ -43,7 +43,7 @@ export default function ProductManagement() {
 
   useEffect(() => {
     // Fetch products, categories, and brands in a single API call
-    fetch("http://localhost:8080/api/products")
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/products`)
       .then((res) => res.json())
       .then((data) => {
         setProducts(data.data.products || []);

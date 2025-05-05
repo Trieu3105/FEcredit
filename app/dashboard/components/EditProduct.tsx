@@ -55,7 +55,7 @@ export default function EditProduct({
       };
 
       const response = await fetch(
-        `http://localhost:8080/api/products/${product.id}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/products/${product.id}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },

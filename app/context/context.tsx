@@ -50,7 +50,7 @@ const UserProvider = ({ children }: UserProviderProps) => {
   // Hàm fetch thông tin người dùng từ API
   const fetchUserData = async (accessToken: string) => {
     try {
-      const response = await axios.get("http://localhost:8080/api/profile", {
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/profile`, {
         headers: { Authorization: `Bearer ${accessToken}` },
         withCredentials: true,
       });
