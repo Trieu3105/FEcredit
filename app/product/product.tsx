@@ -72,7 +72,7 @@ export default function Product() {
   }, [selectedCategoryId]);
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/media`)
+    fetch("http://tlshop-backend-production.up.railway.app/api/media")
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
@@ -105,7 +105,7 @@ export default function Product() {
 
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/add`,
+        "http://tlshop-backend-production.up.railway.app/api/add",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

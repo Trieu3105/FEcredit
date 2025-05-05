@@ -25,7 +25,7 @@ export default function Home() {
 
   useEffect(() => {
     // Gọi API để lấy danh sách sản phẩm
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/products`)
+    fetch("http://tlshop-backend-production.up.railway.app/api/products")
       .then((response) => response.json())
       .then((data) => {
         if (data.success && Array.isArray(data.data.products)) {
