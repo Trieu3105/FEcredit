@@ -57,20 +57,39 @@ export default function Home() {
   };
 
   useEffect(() => {
-    // Gọi API để lấy dữ liệu slideshow và intro
-    fetch("http://tlshop-backend-production.up.railway.app/api/media")
-      .then((response) => response.json())
-      .then((data) => {
+    const apiUrl = "http://tlshop-backend-production.up.railway.app/api/media";
+    console.log("Fetching from:", apiUrl);
+  
+    fetch(apiUrl)
+      .then(async (response) => {
+        const contentType = response.headers.get("content-type");
+        const status = response.status;
+        console.log("Response status:", status);
+        console.log("Content-Type:", contentType);
+  
+        if (!response.ok) {
+          console.error("Response not OK:", status);
+          const text = await response.text();
+          throw new Error(`Response not OK. Text: ${text}`);
+        }
+  
+        const data = await response.json();
+        console.log("Received data:", data);
+  
         if (data.success) {
-          setSlides(data.slideshow); // Lưu dữ liệu slideshow
-          if (data.intro.length > 0) {
-            setIntroData(data.intro); // Lưu dữ liệu intro
-            console.log("check du lieu", data.intro);
+          setSlides(data.slideshow || []);
+          if (Array.isArray(data.intro) && data.intro.length > 0) {
+            setIntroData(data.intro);
           }
+        } else {
+          console.warn("API success flag false:", data);
         }
       })
-      .catch((error) => console.error("Error fetching media data:", error));
+      .catch((error) => {
+        console.error("Error fetching media data:", error.message || error);
+      });
   }, []);
+  
   useEffect(() => {
     const startTransition = () => {
       intervalRef.current = setTimeout(() => {
