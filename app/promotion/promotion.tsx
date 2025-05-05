@@ -39,7 +39,7 @@ export default function Promotion() {
     const fetchProducts = async () => {
       setLoading(true);
       try {
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/products`, {
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/products`, {
           params: { parent_id: selectedCategoryId },
         });
 
@@ -67,7 +67,7 @@ export default function Promotion() {
   }, [selectedCategoryId]);
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/media`)
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/media`)
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
@@ -87,7 +87,7 @@ export default function Promotion() {
     }
 
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/add)`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/add)`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id_user, id_product, quantity: 1 }),

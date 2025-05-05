@@ -40,7 +40,7 @@ export default function CartTable() {
     const fetchCartData = async () => {
       try {
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/carts/${userId}`
+          `${process.env.NEXT_PUBLIC_API_URL}/carts/${userId}`
         );
         const data = await response.json();
         console.log("Dữ liệu giỏ hàng:", data);
