@@ -39,7 +39,7 @@ export default function Promotion() {
     const fetchProducts = async () => {
       setLoading(true);
       try {
-        const response = await axios.get('${process.env.NEXT_PUBLIC_API_URL}/api/products', {
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/products`, {
           params: { parent_id: selectedCategoryId },
         });
 
