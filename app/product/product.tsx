@@ -25,7 +25,9 @@ interface Product {
 export default function Product() {
   const [products, setProducts] = useState<Product[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
-  const [selectedCategoryId, setSelectedCategoryId] = useState<number | null>(null);
+  const [selectedCategoryId, setSelectedCategoryId] = useState<number | null>(
+    null
+  );
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [slides, setSlides] = useState<
@@ -38,10 +40,16 @@ export default function Product() {
     const fetchProducts = async () => {
       setLoading(true);
       try {
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/products`, {
-          params: { parent_id: selectedCategoryId }, // Gửi parent_id đến backend
-        });
-        if (response.data.success && Array.isArray(response.data.data.products)) {
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_URL}/api/products`,
+          {
+            params: { parent_id: selectedCategoryId }, // Gửi parent_id đến backend
+          }
+        );
+        if (
+          response.data.success &&
+          Array.isArray(response.data.data.products)
+        ) {
           setProducts(response.data.data.products); // Ensure products is an array
           setFilteredProducts(response.data.data.products); // Ensure filteredProducts is an array
         } else {
@@ -64,7 +72,19 @@ export default function Product() {
   }, [selectedCategoryId]);
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/sanpham`)
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/media`)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          setSlides(data.slideshow);
+          console.log("Slides data:", data.slideshow); // Debugging: Log the slides data
+        }
+      })
+      .catch((error) => console.error("Lỗi không lấy được data media:", error));
+  }, []);
+
+  useEffect(() => {
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/media`)
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
@@ -84,11 +104,14 @@ export default function Product() {
     }
 
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/add`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id_user, id_product, quantity: 1 }),
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/add`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ id_user, id_product, quantity: 1 }),
+        }
+      );
 
       const data = await response.json();
       alert(data.message || "Thêm giỏ hàng thành công!");
