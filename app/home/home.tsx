@@ -57,7 +57,12 @@ export default function Home() {
   };
 
   useEffect(() => {
-    const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/api/media`;
+    const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/api/media`,
+      headers = {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      credentials = "include";
     console.log("Fetching from:", apiUrl);
   
     fetch(apiUrl)

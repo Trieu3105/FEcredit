@@ -103,6 +103,7 @@ export default function ProductManagement() {
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/products`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
+      credentials: "include",
       body: JSON.stringify({
         ...newProduct,
         specifications: JSON.parse(newProduct.specifications || "{}"),
