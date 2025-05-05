@@ -58,7 +58,7 @@ export default function Home() {
 
   useEffect(() => {
     // Gọi API để lấy dữ liệu slideshow và intro
-    fetch("http://tlshop-backend-production.up.railway.app/api/media")
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/media` )
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
