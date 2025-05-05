@@ -72,7 +72,7 @@ export default function Product() {
   }, [selectedCategoryId]);
 
   useEffect(() => {
-    fetch("http://tlshop-backend-production.up.railway.app/api/media")
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/media`)
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
