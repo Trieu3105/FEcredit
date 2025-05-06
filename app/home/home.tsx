@@ -57,7 +57,7 @@ export default function Home() {
   };
 
   useEffect(() => {
-    const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/api/media`;
+    const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/media`;
     console.log("Fetching from:", apiUrl);
   
     fetch(apiUrl)

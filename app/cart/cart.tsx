@@ -40,7 +40,7 @@ export default function CartTable() {
     const fetchCartData = async () => {
       try {
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/carts/${userId}`
+          `${process.env.NEXT_PUBLIC_API_URL}/carts/${userId}`
         );
         const data = await response.json();
         console.log("Dữ liệu giỏ hàng:", data);
@@ -79,7 +79,7 @@ export default function CartTable() {
   const removeItem = async (id: number) => {
     try {
       setCart((prevCart) => prevCart.filter((item) => item.id !== id));
-      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/remove`, {
+      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/remove`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id_cart_item: id }),
@@ -98,7 +98,7 @@ export default function CartTable() {
   // 🛒 Xử lý cập nhật giỏ hàng
   const handleUpdateCart = async () => {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/update`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/update`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ cartItems: cart }), // Gửi toàn bộ giỏ hàng lên API

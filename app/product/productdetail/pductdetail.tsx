@@ -80,7 +80,7 @@ export default function Productdetail() {
     const quantity = 1;
 
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/add`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/add`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id_user, id_product, quantity }),
