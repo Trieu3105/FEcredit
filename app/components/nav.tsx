@@ -31,92 +31,44 @@ export default function Nav() {
   }, [user]);
 
   return (
-    <nav className="bg-white/10 backdrop-blur-md fixed top-0 left-0 w-full z-50 ">
+    <nav className="bg-white/10 bg-black/10 backdrop-blur-md fixed top-0 left-0 w-full z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
+        <div className="flex items-center justify-between h-16 relative">
+          {/* Logo - trái */}
           <Link href="/" className="text-xl font-bold text-white">
             2Store Apple
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="Navigation hidden md:flex items-center space-x-6 text-white">
-            <Link href="/" className="hover:text-gray-300 ">
-              Trang Chủ
-            </Link>
-            <Link href="/product" className="hover:text-gray-300">
-              Sản Phẩm
-            </Link>
-            <Link href="/promotion" className="hover:text-gray-300">
-              Khuyến mãi
-            </Link>
-            <Link href="/product/accessories" className="hover:text-gray-300">
-              Liên Hệ
-            </Link>
-            <Link href="/product/deals" className="hover:text-gray-300">
-              Deals
-            </Link>
-            <Search className="w-5 h-5 hover:text-gray-300 cursor-pointer" />
-            <Link href="/cart" className="hover:text-gray-300">
-              <ShoppingCart className="w-5 h-5" />
-            </Link>
-
-            {/* Auth Section */}
+          <div className="hidden md:flex items-center space-x-6 text-white">
+            <Link href="/">Trang Chủ</Link>
+            <Link href="/product">Sản phẩm</Link>
+            <Link href="/promotion">Khuyến mãi</Link>
+            <Link href="/product/accessories">Liên Hệ</Link>
+            <Link href="/product/deals">Deals</Link>
+            <Link href="/cart">Giỏ Hàng</Link>
             {user ? (
-              <DropdownMenu>
-                <DropdownMenuTrigger className="flex items-center cursor-pointer hover:text-gray-300">
-                  <span>Xin chào, {user.full_name}</span>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent className="w-44">
-                  <DropdownMenuItem asChild>
-                    <Link href="/profile">
-                      <Settings className="w-4 h-4 mr-2" /> Tài khoản
-                    </Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem asChild>
-                    <Link href="/cart">
-                      <ShoppingCart className="w-4 h-4 mr-2" /> Đơn hàng
-                    </Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem
-                    onClick={logout}
-                    className="text-red-500 cursor-pointer"
-                  >
-                    <LogOut className="w-4 h-4 mr-2" /> Đăng xuất
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
+              <>
+                <Link href="/profile">Tài khoản</Link>
+                <Link href="/cart">Đơn hàng</Link>
+                <button
+                  onClick={logout}
+                  className="text-red-500 hover:text-red-400"
+                >
+                  Đăng xuất
+                </button>
+              </>
             ) : (
-              <DropdownMenu>
-                <DropdownMenuTrigger className="hover:text-gray-300 focus:outline-none">
-                  <User className="w-5 h-5 cursor-pointer" />
-                </DropdownMenuTrigger>
-                <DropdownMenuContent className="bg-white shadow-lg rounded-md p-2 w-40">
-                  <DropdownMenuItem asChild>
-                    <Link
-                      href="/auth/login"
-                      className="flex items-center p-2 hover:bg-gray-100 rounded"
-                    >
-                      <LogIn className="w-4 h-4 mr-2" /> Đăng nhập
-                    </Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem asChild>
-                    <Link
-                      href="/auth/register"
-                      className="flex items-center p-2 hover:bg-gray-100 rounded"
-                    >
-                      <UserPlus className="w-4 h-4 mr-2" /> Đăng ký
-                    </Link>
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
+              <>
+                <Link href="/auth/login">Đăng nhập</Link>
+                <Link href="/auth/register">Đăng ký</Link>
+              </>
             )}
           </div>
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-white"
+            className="md:hidden text-white z-10"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             {isMenuOpen ? (
@@ -129,67 +81,42 @@ export default function Nav() {
       </div>
 
       {/* Mobile Navigation */}
-      {isMenuOpen && (
-        <div className="md:hidden bg-black/90 text-white px-6 py-4 space-y-4">
-          <Link
-            href="/"
-            onClick={() => setIsMenuOpen(false)}
-            className="block hover:text-gray-300"
-          >
+      <div
+        className={`md:hidden transition-all duration-500 ease-in-out overflow-hidden px-6 text-white ${
+          isMenuOpen ? "max-h-[600px] py-4" : "max-h-0 py-0"
+        }`}
+      >
+        <div className="space-y-4 grid grid-cols-1 ">
+          <a href="/" onClick={() => setIsMenuOpen(false)}>
             Trang Chủ
-          </Link>
-          <Link
-            href="/product"
-            onClick={() => setIsMenuOpen(false)}
-            className="block hover:text-gray-300"
-          >
-            Sản Phẩm
-          </Link>
-          <Link
-            href="/promotion"
-            onClick={() => setIsMenuOpen(false)}
-            className="block hover:text-gray-300"
-          >
+          </a>
+          <a href="/product" onClick={() => setIsMenuOpen(false)}>
+            Sản phẩm
+          </a>
+          <a href="/promotion" onClick={() => setIsMenuOpen(false)}>
             Khuyến mãi
-          </Link>
-          <Link
-            href=""
+          </a>
+          <a
+            href="/product/accessories"
             onClick={() => setIsMenuOpen(false)}
-            className="block hover:text-gray-300"
           >
             Liên Hệ
-          </Link>
-          <Link
-            href="/product/deals"
-            onClick={() => setIsMenuOpen(false)}
-            className="block hover:text-gray-300"
-          >
+          </a>
+          <a href="/product/deals" onClick={() => setIsMenuOpen(false)}>
             Deals
-          </Link>
-          <Link
-            href="/cart"
-            onClick={() => setIsMenuOpen(false)}
-            className="block hover:text-gray-300"
-          >
+          </a>
+          <a  href="/cart" onClick={() => setIsMenuOpen(false)}>
             Giỏ Hàng
-          </Link>
+          </a>
 
           {user ? (
             <>
-              <Link
-                href="/profile"
-                onClick={() => setIsMenuOpen(false)}
-                className="block hover:text-gray-300"
-              >
+              <a href="/profile" onClick={() => setIsMenuOpen(false)}>
                 Tài khoản
-              </Link>
-              <Link
-                href="/cart"
-                onClick={() => setIsMenuOpen(false)}
-                className="block hover:text-gray-300"
-              >
+              </a>
+              <a href="/cart" onClick={() => setIsMenuOpen(false)}>
                 Đơn hàng
-              </Link>
+              </a>
               <button
                 onClick={() => {
                   logout();
@@ -202,24 +129,16 @@ export default function Nav() {
             </>
           ) : (
             <>
-              <Link
-                href="/auth/login"
-                onClick={() => setIsMenuOpen(false)}
-                className="block hover:text-gray-300"
-              >
+              <a href="/auth/login" onClick={() => setIsMenuOpen(false)}>
                 Đăng nhập
-              </Link>
-              <Link
-                href="/auth/register"
-                onClick={() => setIsMenuOpen(false)}
-                className="block hover:text-gray-300"
-              >
+              </a>
+              <a href="/auth/register" onClick={() => setIsMenuOpen(false)}>
                 Đăng ký
-              </Link>
+              </a>
             </>
           )}
         </div>
-      )}
+      </div>
     </nav>
   );
 }

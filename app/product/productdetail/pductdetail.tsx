@@ -73,7 +73,7 @@ export default function Productdetail() {
 
     if (!id_user) {
       alert("Bạn cần đăng nhập để thêm sản phẩm vào giỏ hàng!");
-      window.location.href = "/login";
+      window.location.href = "/auth/login";
       return;
     }
 

@@ -3,6 +3,6 @@ import Product from "./product";
 
 export default function Home() {
   return (
-    <div className="mx-16 mt-[48px]"><Product/></div>
+    <div className="lg:mx-16 mt-[48px] "><Product/></div>
   );
 }

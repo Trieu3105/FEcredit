@@ -83,17 +83,6 @@ export default function Product() {
       .catch((error) => console.error("Lỗi không lấy được data media:", error));
   }, []);
 
-  useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/media`)
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.success) {
-          setSlides(data.slideshow);
-        }
-      })
-      .catch((error) => console.error("Error fetching media data:", error));
-  }, []);
-
   const handleAddToCart = async (id_product: number) => {
     const id_user = user?.id || localStorage.getItem("id_user");
 
@@ -122,14 +111,14 @@ export default function Product() {
   };
 
   return (
-    <div className="flex">
+    <div className="flex flex-col lg:flex-row lg:mx-16">
       {/* Sidebar */}
-      <div className="w-1/4 p-4">
+      <div className="w-full lg:w-1/4 p-4">
         <SidebarMenu onSelectCategory={setSelectedCategoryId} />
       </div>
 
       {/* Content */}
-      <div className="w-3/4 p-4">
+      <div className="w-full lg:w-3/4 p-4">
         {/* Slideshow */}
         <div className="mb-6">
           <Swiper
@@ -138,7 +127,7 @@ export default function Product() {
             loop={true}
             slidesPerView={1}
             className="w-full rounded-lg overflow-hidden"
-            style={{ height: "486px" }}
+            style={{ height: "clamp(200px, 40vw, 486px)" }} // responsive height
           >
             {slides.map((slide, index) => (
               <SwiperSlide key={index}>
@@ -153,17 +142,21 @@ export default function Product() {
         </div>
 
         {/* Product Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 dark:text-gray-600">
-          {loading && <p className="text-center">Đang tải dữ liệu...</p>}
-          {error && <p className="text-center text-red-500">{error}</p>}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
+          {loading && (
+            <p className="text-center col-span-full">Đang tải dữ liệu...</p>
+          )}
+          {error && (
+            <p className="text-center col-span-full text-red-500">{error}</p>
+          )}
           {!loading &&
             !error &&
             filteredProducts.map((product) => (
               <div
                 key={product.id}
-                className="p-4 rounded-lg shadow-md hover:border-gray-500 transition-transform duration-300 hover:scale-105 hover:shadow-lg flex flex-col justify-between h-full cursor-default"
+                className="p-4 rounded-lg shadow-md hover:border-gray-500 transition-transform duration-300 hover:scale-105 hover:shadow-lg flex flex-col justify-between h-full cursor-default bg-white dark:bg-gray-900"
               >
-                <div className="relative w-full h-48 bg-gray-100 rounded-lg overflow-hidden">
+                <div className="relative w-full h-40 sm:h-48 md:h-52 bg-gray-100 rounded-lg overflow-hidden">
                   <img
                     src={product.images[0] || "/fallback-image.jpg"}
                     alt={product.name}
@@ -174,18 +167,18 @@ export default function Product() {
                     }
                   />
                 </div>
-                <div className="mt-4 text-center flex-1 flex flex-col justify-between">
+                <div className="mt-4 flex-1 flex flex-col justify-between">
                   <div>
-                    <h3 className="text-lg text-black font-bold text-left">
+                    <h3 className="text-base sm:text-lg font-bold text-left text-black dark:text-white">
                       {product.name}
                     </h3>
-                    <p className="text-gray-800 font-semibold text-left">
+                    <p className="text-sm sm:text-base text-gray-800 dark:text-gray-300 font-semibold text-left">
                       {Number(product.price).toLocaleString("vi-VN")} VNĐ
                     </p>
                   </div>
-                  <div className="grid grid-cols-2 gap-2 mt-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-4">
                     <Button
-                      className="mt-4 dark:text-white hover:bg-blue-600"
+                      className="w-full text-sm sm:text-base hover:bg-blue-600 dark:text-white"
                       onClick={() =>
                         (window.location.href = `/product/productdetail?id=${product.id}`)
                       }
@@ -193,7 +186,7 @@ export default function Product() {
                       Xem chi tiết
                     </Button>
                     <Button
-                      className="mt-4 dark:text-white hover:bg-blue-600"
+                      className="w-full text-sm sm:text-base hover:bg-blue-600 dark:text-white"
                       onClick={() => handleAddToCart(product.id)}
                     >
                       Thêm vào giỏ

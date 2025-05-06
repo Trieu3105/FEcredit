@@ -58,7 +58,7 @@ export default function Home() {
 
   useEffect(() => {
     const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/api/media`;
-    console.log("Fetching from:", apiUrl);
+    console.log("Kết quả của gọi API", apiUrl);
   
     fetch(apiUrl)
       .then(async (response) => {
@@ -86,7 +86,7 @@ export default function Home() {
         }
       })
       .catch((error) => {
-        console.error("Error fetching media data:", error.message || error);
+        console.error("lỗi kết lấy data:", error.message || error);
       });
   }, []);
   
@@ -256,7 +256,7 @@ export default function Home() {
         </div>
       </section>
       {/* New Arrivals */}
-      <section className="py-4 px-4 mx-16">
+      <section className="py-4 px-4 lg:mx-16">
         <Arrivals />
       </section>
       {/* Features Section */}

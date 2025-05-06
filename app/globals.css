@@ -11,7 +11,7 @@
     --card-foreground: 220 9% 30%; /* gray-700 */
     --popover: 0 0% 100%;
     --popover-foreground: 220 9% 30%;
-    --primary: 220 10% 15%; /* như foreground, để đồng bộ */
+    --primary: 220 10% 90%; /* như foreground, để đồng bộ */
     --primary-foreground: 0 0% 100%;
     --secondary: 0 0% 90%;
     --secondary-foreground: 220 9% 35%;
@@ -157,3 +157,68 @@
 .stroke-text {
   -webkit-text-stroke: 0.5px rgb(244, 238, 238); /* Viền đen */
 }
+/* Mobile menu */
+@media (max-width: 768px) {
+  .Navigation {
+    display: none; /* Ẩn menu desktop khi ở chế độ mobile */
+  }
+
+  .Navigation.mobile {
+    display: block; /* Hiển thị menu cho thiết bị di động */
+  }
+
+  .Navigation.mobile a {
+    padding: 0.5rem 0; /* Tăng khoảng cách giữa các item */
+    font-size: 1.25rem; /* Font size lớn hơn cho dễ đọc trên mobile */
+    text-align: center; /* Căn giữa các item */
+    border-bottom: 1px solid hsl(var(--border)); /* Thêm đường phân cách cho các item */
+  }
+
+  /* Mobile Menu Button */
+  .md\:hidden {
+    display: block; /* Hiển thị button menu trên mobile */
+  }
+
+  /* Tối ưu hover cho các item menu trên mobile */
+  .Navigation.mobile a:hover {
+    background-color: hsl(var(--accent));
+    color: hsl(var(--accent-foreground));
+  }
+
+  /* Điều chỉnh kích thước icon menu */
+  .md\:hidden svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  /* Style cho menu khi mở */
+  .md\:hidden + div {
+    display: block;
+  }
+
+  /* Mobile Navigation */
+  .md\:hidden + div {
+    display: none; /* Ban đầu không hiển thị menu */
+    background-color: hsl(var(--primary));
+    padding: 1rem;
+    border-top: 2px solid hsl(var(--border));
+  }
+
+  .md\:hidden + div.show {
+    display: block; /* Hiển thị menu khi clicked */
+  }
+}
+
+/* Desktop Navigation */
+@media (min-width: 769px) {
+  .md\:hidden {
+    display: none; /* Ẩn button menu khi ở chế độ desktop */
+  }
+
+  .Navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
