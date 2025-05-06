@@ -39,7 +39,7 @@ export default function Create() {
 
   useEffect(() => {
     // Fetch products, categories, and brands in a single API call
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/products`)
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/products`)
       .then((res) => res.json())
       .then((data) => {
         setProducts(data.data.products || []);

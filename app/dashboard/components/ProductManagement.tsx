@@ -100,7 +100,7 @@ export default function ProductManagement() {
       images: JSON.parse(JSON.stringify(newProduct.images || "[]")),
     }); // Debugging: Log the product data being sent
 
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/products`, {
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/products`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials: "include",

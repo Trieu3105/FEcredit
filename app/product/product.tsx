@@ -41,7 +41,7 @@ export default function Product() {
       setLoading(true);
       try {
         const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_API_URL}/products`,
+          `${process.env.NEXT_PUBLIC_API_URL}/api/products`,
           {
             params: { parent_id: selectedCategoryId }, // Gửi parent_id đến backend
           }
@@ -72,7 +72,7 @@ export default function Product() {
   }, [selectedCategoryId]);
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/media`)
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/media`)
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
@@ -105,7 +105,7 @@ export default function Product() {
 
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/add`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/add`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
